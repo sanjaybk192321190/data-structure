@@ -1,0 +1,105 @@
+#include<stdio.h>
+
+struct htable
+{
+	int tsize;
+	int a[50];
+}*h;
+
+int flag[50]={0,0};
+
+
+void insert(int x)
+{
+	int i,hval,h1;
+	hval=x % h->tsize;
+	
+	if(flag[hval]==0)
+	{
+		h->a[hval]=x;
+		flag[hval]=1;
+	}
+	else
+	{
+		for(i=0;i<h->tsize;i++)
+		{
+			h1=(hval+i)%h->tsize;
+			if(flag[h1]==0)
+			{
+				h->a[h1]=x;
+				flag[h1]=1;
+				break;
+			}
+		}
+	}
+}
+
+
+void find(int x)
+{
+ 	int i,hval,h1,f=0;
+	hval=x%h->tsize;
+
+	if(x==h->a[hval])
+	{
+		printf("FOUND");
+		f=1;
+	}
+	else  for(i=0;i<h->tsize;i++)
+		{
+			h1=(hval+i)%h->tsize;
+			if(h->a[h1]==x)
+			{
+				printf("FOUND");
+				f=1;
+				break;
+			}
+		}
+
+	if(f==0)
+		printf("NOT FOUND");
+}
+
+
+
+
+void display()
+{
+	int i;
+	for(i=0;i<h->tsize;i++)
+	{
+		if(flag[i]!=0)
+			printf("a[%d] is   %d\n" ,i,h->a[i]);
+	}
+}
+
+main()
+{
+ 	int ch,i,x;
+ 	h=(struct htable*)malloc(sizeof(struct htable));
+ 	h->tsize=10;
+ 	do
+ 	{
+ 		printf("\n*** Main Menu ***");
+		printf("\n1.Insert\n2.Find\n3.Display\n4.Exit\n");
+ 		scanf("%d",&ch);
+ 		switch(ch)
+ 		{
+ 			case 1:
+ 					printf("Enter value\n");
+ 					scanf("%d",&x);
+ 					insert(x);
+ 					break;
+ 			case 2:
+     				printf("Enter value\n");
+ 					scanf("%d",&x);
+ 					find(x);
+ 					break;
+ 			case 3:
+ 					display();
+ 					break;
+			case 4:
+					exit(0);
+ 		}
+ 	}while(ch!=4);
+}
