@@ -1,0 +1,31 @@
+#include<stdio.h>
+
+int main(){
+    int r1 = 2, c1 = 3, r2 = 3, c2 = 2;
+    int mat1[2][3] = {{1, 2, 3}, {4, 5, 6}};
+    int mat2[3][2] = {{7, 8}, {9, 8}, {11, 12}};
+    int res[2][2] = {0};
+
+    if(c1 != r2){
+        printf("Matrices cannot be multiplied.\n");
+        return 1;
+    }
+
+    for(int i = 0; i < r1; i++){
+        for(int j = 0; j < c2; j++){
+            for(int k = 0; k < c1; k++){
+                res[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+
+    printf("Resultant matrix:\n");
+    for(int i = 0; i < r1; i++){
+        for(int j = 0; j < c2; j++){
+            printf("%d ", res[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
